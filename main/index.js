@@ -1,6 +1,7 @@
 const express = require('express');
 // Import and require mysql2
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
+const { prompt } = require('inquirer')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -9,9 +10,48 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+init ()
 // Connect to database
 
+function init () {
+  
+  loadInitialQuestions()
+}
 
+function loadInitialQuestions() {
+  prompt([
+    {
+      type: "list",
+      name: "action",
+      message: 'What would you like to do?,
+      choices: [
+        {
+          name: "View all Departments",
+          value: "VIEW_DEPARTMENTS"
+        },
+        {
+          name: "Add a Departments",
+          value: "Add_DEPARTMENT"
+        },
+      ]
+    }
+  ])
+
+
+.then(choice => {
+  let answer = choice.action
+
+  switch (answer) {
+    case "VIEW_DEPARTMENTS":
+      viewDepartment ()
+      break;
+
+      default:
+        break;
+  }
+})
+}
 
 // const db = mysql.createConnection(
 //   {
