@@ -1,7 +1,9 @@
-const express = require('express');
 // Import and require mysql2
 // const mysql = require('mysql2');
 const { prompt } = require('inquirer')
+const { table} = require
+
+const queries = require("./Queries")
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -30,9 +32,13 @@ function loadInitialQuestions() {
           name: "View all Departments",
           value: "VIEW_DEPARTMENTS"
         },
-        {
+        { 
           name: "Add a Departments",
-          value: "Add_DEPARTMENT"
+          value: "ADD_DEPARTMENT"
+        },
+        {
+          name: "Update Employee Role",
+          value: "UPDATE_EMPLOYEE_ROLE"
         },
       ]
     }
@@ -46,12 +52,29 @@ function loadInitialQuestions() {
     case "VIEW_DEPARTMENTS":
       viewDepartment ()
       break;
-
+        case "ADD_DEPARTMENT":
+          addDepartments ();
+          break;
+            case "UPDATE_EMPLOYEE_ROLE":
+            break;
+              updateEmployeeRole();
+              break;
       default:
         break;
   }
 })
 }
+
+
+//make a VD query
+function viewDepartments() {
+  queries
+.viewDepartment()
+.then(([)rows, fields]) => {
+  console.log(rows)
+});
+}
+function updateEmployeeRole() {}
 
 // const db = mysql.createConnection(
 //   {
